@@ -1,7 +1,6 @@
 // @ts-check
 const ExtractCssChunks = require("extract-css-chunks-webpack-plugin");
 const paths = require("razzle/config/paths");
-const getCSSModuleLocalIdent = require("react-dev-utils/getCSSModuleLocalIdent");
 
 const autoprefixer = require("autoprefixer");
 const PostCssFlexBugFixes = require("postcss-flexbugs-fixes");
@@ -65,7 +64,7 @@ const defaultOptions = {
       sourceMap: false,
       importLoaders: 2,
       modules: {
-        getLocalIdent: getCSSModuleLocalIdent,
+        localIdentName: "[local]__[hash:base64:5]",
       },
     },
   },
