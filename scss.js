@@ -5,6 +5,8 @@ const paths = require("razzle/config/paths");
 const autoprefixer = require("autoprefixer");
 const PostCssFlexBugFixes = require("postcss-flexbugs-fixes");
 
+const createMinifier = require("css-loader-minify-class");
+
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
@@ -58,13 +60,15 @@ const defaultOptions = {
       sourceMap: true,
       importLoaders: 2,
       localsConvention: "camelCaseOnly",
-      modules: true,
+      modules: {
+        localIdentName: "[path]__[name]___[local]",
+      },
     },
     prod: {
       sourceMap: false,
       importLoaders: 2,
       modules: {
-        localIdentName: "[local]__[hash:base64:5]",
+        getLocalIdent: createMinifier({ prefix: "S", blacklist: [] }),
       },
     },
   },
